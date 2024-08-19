@@ -1,1 +1,0 @@
-export const SERVICE_FEE_PERCENTAGE = 0.15

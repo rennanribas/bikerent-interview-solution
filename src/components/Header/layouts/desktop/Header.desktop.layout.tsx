@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import NextLink from 'next/link'
 import { Actions, Container, Icon, LoginButton, SignUpButton, Title } from './Header.desktop.styles'
 
 const DesktopHeader = () => {
@@ -16,15 +16,20 @@ const DesktopHeader = () => {
           <Icon fontSize='small' />
         </Box>
 
-        <Link to='/login' data-testid='login-button'>
-          <LoginButton>Log in</LoginButton>
-        </Link>
+        <NextLink href='/login' passHref>
+          <LoginButton data-testid='login-button'>Log in</LoginButton>
+        </NextLink>
 
-        <Link to='/sign-up' data-testid='signup-button'>
-          <SignUpButton variant='contained' color='secondary' disableElevation>
+        <NextLink href='/sign-up' passHref>
+          <SignUpButton
+            variant='contained'
+            color='secondary'
+            disableElevation
+            data-testid='signup-button'
+          >
             Sign up
           </SignUpButton>
-        </Link>
+        </NextLink>
       </Actions>
     </Container>
   )

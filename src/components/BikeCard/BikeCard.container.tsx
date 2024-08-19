@@ -1,7 +1,7 @@
-import Bike from 'models/Bike'
+// src/components/BikeCard.container.tsx
+import Bike from '../../models/Bike' // Adjusted import path
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Paths } from 'routes/paths'
+import { useRouter } from 'next/router'
 import BikeCard from './BikeCard.component'
 
 interface BikeCardProps {
@@ -9,12 +9,15 @@ interface BikeCardProps {
 }
 
 const BikeCardContainer = ({ bike }: BikeCardProps) => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   const handleOpenBikeDetails = () => {
-    navigate(Paths.BIKE_DETAILS, { state: { bike } })
+    router.push({
+      pathname: '/BikeDetails/[id]',
+      query: { id: bike.id },
+    })
   }
 
   const handleIsImageLoaded = (isLoading: boolean) => {

@@ -1,6 +1,6 @@
 import { Box, Dialog, IconButton, Typography } from '@mui/material'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import NextLink from 'next/link'
 import {
   Actions,
   Container,
@@ -41,15 +41,20 @@ const MobileHeader = () => {
 
       <Dialog open={isMenuOpen} onClose={handleToggleIsMenuOpen}>
         <MenuModal>
-          <Link to='/login' data-testid='login-button'>
-            <LoginButton>Log in</LoginButton>
-          </Link>
+          <NextLink href='/login' passHref>
+            <LoginButton data-testid='login-button'>Log in</LoginButton>
+          </NextLink>
 
-          <Link to='/sign-up' data-testid='signup-button'>
-            <SignUpButton variant='contained' color='secondary' disableElevation>
+          <NextLink href='/sign-up' passHref>
+            <SignUpButton
+              variant='contained'
+              color='secondary'
+              disableElevation
+              data-testid='signup-button'
+            >
               Sign up
             </SignUpButton>
-          </Link>
+          </NextLink>
         </MenuModal>
       </Dialog>
     </>
