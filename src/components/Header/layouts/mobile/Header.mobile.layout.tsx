@@ -46,7 +46,7 @@ const MobileHeader = () => {
           {isAuthenticated ? (
             <Box display='flex' alignItems='center'>
               <Typography color='white' marginX={2}>
-                Welcome, {user?.name || 'User'}
+                Welcome, {user?.name || 'User'}!
               </Typography>
               <LoginButton color='inherit' onClick={logout}>
                 Log out

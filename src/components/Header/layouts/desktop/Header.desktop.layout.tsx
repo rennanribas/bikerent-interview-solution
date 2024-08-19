@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import NextLink from 'next/link'
 import { Actions, Container, Icon, LoginButton, SignUpButton, Title } from './Header.desktop.styles'
 import { useAuth } from 'context/AuthContext'
@@ -21,7 +21,7 @@ const DesktopHeader = () => {
         {isAuthenticated ? (
           <Box display='flex' alignItems='center'>
             <Typography color='white' marginX={2}>
-              Welcome, {user?.name || 'User'}
+              Welcome, {user?.name || 'User'}!
             </Typography>
             <LoginButton color='inherit' onClick={logout}>
               Log out

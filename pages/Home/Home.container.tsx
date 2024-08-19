@@ -1,21 +1,32 @@
 import Bike from 'models/Bike'
 import { useEffect, useState } from 'react'
 import Home from './Home.component'
-import { BOILERPLATE_CANDIDATE_TOKEN } from 'config'
 
 const HomeContainer = () => {
   const [bikes, setBikes] = useState<Bike[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const getAllBikes = async () => {
-      const response = await fetch('/api/bikes')
-      setBikes(await response.json())
+      try {
+        const response = await fetch('/api/bikes')
+        const data = await response.json()
+        setBikes(data)
+      } catch (error) {
+        console.error('Error fetching bikes:', error)
+      } finally {
+        setIsLoading(false)
+      }
     }
 
     getAllBikes()
   }, [])
 
-  return <Home appIsNotConfigured={!BOILERPLATE_CANDIDATE_TOKEN} bikes={bikes} />
+  if (isLoading) {
+    return <div>Loading Bike List...</div>
+  }
+
+  return <Home bikes={bikes} />
 }
 
 export default HomeContainer

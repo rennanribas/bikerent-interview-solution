@@ -28,7 +28,6 @@ export default async function loginApi(req: NextApiRequest, res: NextApiResponse
     if (!users) {
       throw new Error('Failed to fetch users')
     }
-    console.log('users', users)
     const foundUser = users.find(
       (user: User) =>
         user.email === email && user.password === password && user.candidateId === cadidateId,
@@ -45,7 +44,6 @@ export default async function loginApi(req: NextApiRequest, res: NextApiResponse
       },
       process.env.BOILERPLATE_CANDIDATE_TOKEN as string,
     )
-    console.log(foundUser, token)
 
     res.status(200).json({ user: foundUser, token })
   } catch (error) {
