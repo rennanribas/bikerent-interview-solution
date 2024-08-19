@@ -3,6 +3,7 @@ import Bike from '../../models/Bike' // Adjusted import path
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import BikeCard from './BikeCard.component'
+import { useBike } from 'context/BikeContext'
 
 interface BikeCardProps {
   bike: Bike
@@ -10,14 +11,13 @@ interface BikeCardProps {
 
 const BikeCardContainer = ({ bike }: BikeCardProps) => {
   const router = useRouter()
+  const { setBike } = useBike()
 
   const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   const handleOpenBikeDetails = () => {
-    router.push({
-      pathname: '/BikeDetails/[id]',
-      query: { id: bike.id },
-    })
+    setBike(bike)
+    router.push('/BikeDetails')
   }
 
   const handleIsImageLoaded = (isLoading: boolean) => {

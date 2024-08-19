@@ -1,8 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
+import jwt from 'jsonwebtoken'
 
-const apiServer = axios.create({
+export const apiServer = axios.create({
   baseURL: process.env.API_DOMAIN,
+  headers: {
+    Authorization: `${process.env.BOILERPLATE_CANDIDATE_TOKEN}`,
+  },
 })
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,12 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const path = url?.startsWith('/api') ? url.replace('/api', '') : url
     const apiUrl = path || '/'
-    console.log('apiUrl', apiUrl)
 
     const options = {
-      headers: {
-        Authorization: `${process.env.BOILERPLATE_CANDIDATE_TOKEN}`,
-      },
       method,
       data: req.body,
     }

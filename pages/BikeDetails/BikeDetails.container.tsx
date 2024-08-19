@@ -1,11 +1,9 @@
-import Bike from 'models/Bike'
 import BikeDetails from './BikeDetails.component'
+import { useBike } from 'context/BikeContext'
 
-interface BikeDetailsContainerProps {
-  bike: Bike
-}
+const BikeDetailsContainer = () => {
+  const { bike } = useBike()
 
-const BikeDetailsContainer = ({ bike }: BikeDetailsContainerProps) => {
   return <BikeDetails bike={bike} />
 }
 

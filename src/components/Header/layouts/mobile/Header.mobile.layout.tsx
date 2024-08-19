@@ -11,9 +11,11 @@ import {
   SignUpButton,
   Title,
 } from './Header.mobile.styles'
+import { useAuth } from 'context/AuthContext'
 
 const MobileHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { isAuthenticated, user, logout } = useAuth()
 
   const handleToggleIsMenuOpen = () => {
     setIsMenuOpen((currentValue) => !currentValue)
@@ -41,20 +43,33 @@ const MobileHeader = () => {
 
       <Dialog open={isMenuOpen} onClose={handleToggleIsMenuOpen}>
         <MenuModal>
-          <NextLink href='/login' passHref>
-            <LoginButton data-testid='login-button'>Log in</LoginButton>
-          </NextLink>
+          {isAuthenticated ? (
+            <Box display='flex' alignItems='center'>
+              <Typography color='white' marginX={2}>
+                Welcome, {user?.name || 'User'}
+              </Typography>
+              <LoginButton color='inherit' onClick={logout}>
+                Log out
+              </LoginButton>
+            </Box>
+          ) : (
+            <>
+              <NextLink href='/Login' passHref>
+                <LoginButton data-testid='login-button'>Log in</LoginButton>
+              </NextLink>
 
-          <NextLink href='/sign-up' passHref>
-            <SignUpButton
-              variant='contained'
-              color='secondary'
-              disableElevation
-              data-testid='signup-button'
-            >
-              Sign up
-            </SignUpButton>
-          </NextLink>
+              <NextLink href='/Signup' passHref>
+                <SignUpButton
+                  variant='contained'
+                  color='secondary'
+                  disableElevation
+                  data-testid='signup-button'
+                >
+                  Sign up
+                </SignUpButton>
+              </NextLink>
+            </>
+          )}
         </MenuModal>
       </Dialog>
     </>
