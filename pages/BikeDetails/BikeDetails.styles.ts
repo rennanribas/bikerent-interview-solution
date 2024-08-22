@@ -38,13 +38,14 @@ export const BreadcrumbSeparator = styled(ChevronRightOutlined)(({ theme }) => (
 export const Content = styled(Box)<BoxProps>(({ theme }) => ({
   padding: '0 100px 44px',
   position: 'relative',
-  display: 'grid',
-  gridTemplateColumns: '2fr 1fr',
+  display: 'flex',
+  alignItems: 'flex-start',
   gap: 24,
 
   [theme.breakpoints.down('lg')]: {
-    gridTemplateColumns: '1fr',
     padding: '0 20px 44px',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 }))
 

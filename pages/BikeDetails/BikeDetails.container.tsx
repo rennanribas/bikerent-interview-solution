@@ -13,10 +13,6 @@ const BikeDetailsContainer = () => {
     }
   }, [bike, router])
 
-  if (!bike) {
-    return null
-  }
-
   return <BikeDetails bike={bike} />
 }
 

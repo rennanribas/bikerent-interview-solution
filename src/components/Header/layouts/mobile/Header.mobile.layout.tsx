@@ -6,6 +6,7 @@ import {
   Container,
   LocationIcon,
   LoginButton,
+  LogOutButton,
   MenuIcon,
   MenuModal,
   SignUpButton,
@@ -45,12 +46,16 @@ const MobileHeader = () => {
         <MenuModal>
           {isAuthenticated ? (
             <Box display='flex' alignItems='center'>
-              <Typography color='white' marginX={2}>
-                Welcome, {user?.name || 'User'}!
-              </Typography>
-              <LoginButton color='inherit' onClick={logout}>
+              <Typography marginX={2}>Welcome, {user?.name || 'User'}!</Typography>
+              <LogOutButton
+                variant='contained'
+                color='primary'
+                disableElevation
+                data-testid='logout-button'
+                onClick={logout}
+              >
                 Log out
-              </LoginButton>
+              </LogOutButton>
             </Box>
           ) : (
             <>

@@ -3,13 +3,15 @@ import { useState } from 'react'
 import { Container, PaperStyled } from './Login.styles'
 import { useRouter } from 'next/router'
 import { useAuth } from 'context/AuthContext'
+import { useBike } from 'context/BikeContext'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const { login, isAuthenticated } = useAuth()
+  const { login } = useAuth()
+  const { bike } = useBike()
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -18,7 +20,8 @@ const Login = () => {
       if (response.ok) {
         const { user, token } = await response.json()
         await login(user, token)
-        router.push('/Home')
+        if (bike) router.push('/BikeDetails')
+        else router.push('/Home')
       } else {
         const { error: errorMessage } = await response.json()
         setError(errorMessage || 'An unknown error occurred')

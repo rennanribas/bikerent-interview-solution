@@ -1,6 +1,14 @@
 import { Box, Typography } from '@mui/material'
 import NextLink from 'next/link'
-import { Actions, Container, Icon, LoginButton, SignUpButton, Title } from './Header.desktop.styles'
+import {
+  Actions,
+  Container,
+  Icon,
+  LoginButton,
+  LogOutButton,
+  SignUpButton,
+  Title,
+} from './Header.desktop.styles'
 import { useAuth } from 'context/AuthContext'
 
 const DesktopHeader = () => {
@@ -23,9 +31,9 @@ const DesktopHeader = () => {
             <Typography color='white' marginX={2}>
               Welcome, {user?.name || 'User'}!
             </Typography>
-            <LoginButton color='inherit' onClick={logout}>
-              Log out
-            </LoginButton>
+            <LogOutButton color='inherit' onClick={logout}>
+              Logout
+            </LogOutButton>
           </Box>
         ) : (
           <>
