@@ -26,6 +26,7 @@ const useBookingState = () => {
   const [rentAmount, setRentAmount] = useState<number>(0)
   const [totalAmount, setTotalAmount] = useState<number>(0)
   const [servicesFee, setServicesFee] = useState<number>(0)
+  const [isRenting, setIsRenting] = useState<boolean>(false)
 
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
@@ -42,9 +43,9 @@ const useBookingState = () => {
         userId: user?.id,
       })
       const data = response.data
-      setRentAmount(data.rentAmount)
-      setTotalAmount(data.totalAmount)
-      setServicesFee(data.fee)
+      setRentAmount(data.rentAmount.toFixed(2))
+      setTotalAmount(data.totalAmount.toFixed(2))
+      setServicesFee(data.fee.toFixed(2))
     }
     setSelectedPeriod(period)
   }
@@ -101,6 +102,8 @@ const useBookingState = () => {
     isBooked,
     isLoading,
     handleBooking,
+    isRenting,
+    setIsRenting,
   }
 }
 export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

@@ -1,7 +1,5 @@
-import { ArrowBackIos } from '@mui/icons-material'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import Overview from 'components/Booking/Overview'
-import { useRouter } from 'next/router'
 import {
   MobileDatePicker,
   MobileSelectDateButton,
@@ -11,15 +9,22 @@ import {
   BookingContainer,
   BookingButton,
   BookedModal,
+  HeaderActions,
+  LocationIcon,
+  BackButton,
+  StyledArrowBackIos,
+  ButtonWrapper,
+  ContentWrapper,
 } from './Booking.mobile.styles'
 import DateRangePicker from 'components/DateRangePicker'
 import { CalendarIcon } from 'assets/icons/Calendar'
 import { useBooking } from '../../hooks/useBooking'
 import Booked from 'components/Booking/Booked'
+import MobileMenu from 'components/MobileMenu/Menu.component'
+import Link from 'next/link'
+import BikeCardMini from 'components/BikeCardMini'
 
 const MobileBooking = () => {
-  const router = useRouter()
-
   const {
     onChangePeriod,
     toggleMobileDrawer,
@@ -30,29 +35,64 @@ const MobileBooking = () => {
     isBooked,
   } = useBooking()
 
-  const handleBackClick = () => {
-    router.push('/BikeDetails')
-  }
   return (
-    <BookingContainer data-testid='booking-container' variant='outlined'>
-      <Box display='flex' alignItems='center' marginBottom={2}>
-        <Button onClick={handleBackClick} sx={{ marginRight: 1 }}>
-          <ArrowBackIos />
-        </Button>
-        <Typography variant='h2' fontSize={20} fontWeight={700}>
-          Booking
-        </Typography>
-      </Box>
+    <BookingContainer data-testid='booking-container'>
+      <ContentWrapper>
+        <Box data-testid='header'>
+          <HeaderActions>
+            <MobileMenu />
+            <Box display='flex' alignItems='center' data-testid='location-label'>
+              <Typography color='black' marginRight={0.75}>
+                Manhattan
+              </Typography>
+              <LocationIcon fontSize='small' />
+            </Box>
+          </HeaderActions>
+        </Box>
 
-      <Box width='90%' display='block' marginY={1}>
-        <Typography variant='h2' fontSize={24} fontWeight={'800'} textAlign='left'>
-          Select date and time
-        </Typography>
-      </Box>
-      <MobileDatePicker onClick={toggleMobileDrawer}>
-        <CalendarIcon />
-        {mobileDataLabel}
-      </MobileDatePicker>
+        <Box display='flex' alignItems='center' width='100%' marginBottom={2} position='relative'>
+          <Link href='/' passHref>
+            <BackButton data-testid='back-button'>
+              <StyledArrowBackIos />
+            </BackButton>
+          </Link>
+          <Typography variant='h3' fontWeight={700} width='100%' textAlign='center'>
+            Booking
+          </Typography>
+        </Box>
+
+        <BikeCardMini />
+
+        <Box width='100%' display='block' marginY={4}>
+          <Typography
+            variant='h2'
+            fontSize={24}
+            fontWeight={'700'}
+            textAlign='left'
+            marginBottom={1}
+          >
+            Select date and time
+          </Typography>
+
+          <MobileDatePicker onClick={toggleMobileDrawer}>
+            <CalendarIcon />
+            {mobileDataLabel}
+          </MobileDatePicker>
+        </Box>
+
+        <Overview />
+      </ContentWrapper>
+      <ButtonWrapper>
+        <BookingButton
+          fullWidth
+          disableElevation
+          variant='contained'
+          data-testid='rent-booking-button'
+          onClick={handleBooking}
+        >
+          Add to booking
+        </BookingButton>
+      </ButtonWrapper>
 
       <TransparentSwipeableDrawer
         swipeAreaWidth={56}
@@ -73,17 +113,6 @@ const MobileBooking = () => {
         </StyledDrawer>
       </TransparentSwipeableDrawer>
 
-      <Overview />
-
-      <BookingButton
-        fullWidth
-        disableElevation
-        variant='contained'
-        data-testid='rent-booking-button'
-        onClick={handleBooking}
-      >
-        Add to booking
-      </BookingButton>
       <BookedModal open={isBooked}>
         <Booked />
       </BookedModal>

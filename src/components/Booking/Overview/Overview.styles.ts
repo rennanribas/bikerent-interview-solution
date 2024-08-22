@@ -1,8 +1,8 @@
-import { Box, BoxProps, Button, ButtonProps, Modal, styled, SwipeableDrawer } from '@mui/material'
+import { Box, BoxProps, styled } from '@mui/material'
 import InfoOutlined from '@mui/icons-material/InfoOutlined'
 
 export const OverviewContainer = styled(Box)<BoxProps>(() => ({
-  width: '90%',
+  width: '100%',
 }))
 
 export const PriceRow = styled(Box)<BoxProps>(() => ({

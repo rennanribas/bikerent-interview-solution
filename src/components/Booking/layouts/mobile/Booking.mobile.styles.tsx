@@ -3,24 +3,35 @@ import {
   BoxProps,
   Button,
   ButtonProps,
-  Card,
-  CardProps,
+  Link,
   Modal,
   styled,
   SwipeableDrawer,
 } from '@mui/material'
 import InfoOutlined from '@mui/icons-material/InfoOutlined'
+import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined'
+import Menu from '@mui/icons-material/Menu'
+import { ArrowBackIos } from '@mui/icons-material'
 
-export const BookingContainer = styled(Card)<CardProps>(({ theme }) => ({
-  borderColor: theme.palette.grey[500],
-  padding: '30px 10px',
+export const BookingContainer = styled(Box)<BoxProps>(({ theme }) => ({
+  padding: theme.spacing(4),
   width: '100%',
   maxWidth: '447px',
-  height: 'auto',
+  height: '100vh',
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
 }))
+
+export const ContentWrapper = styled(Box)({
+  flex: 1,
+  overflowY: 'auto',
+})
+
+export const ButtonWrapper = styled(Box)({
+  marginTop: 'auto',
+  width: '100%',
+  paddingTop: '20px',
+})
 
 export const BookingButton = styled(Button)<ButtonProps>(({ theme }) => ({
   borderRadius: 20,
@@ -28,7 +39,8 @@ export const BookingButton = styled(Button)<ButtonProps>(({ theme }) => ({
   marginTop: 30,
   textTransform: 'none',
   color: theme.palette.common.white,
-  fontWeight: 800,
+  fontWeight: 600,
+  fontSize: 24,
 }))
 
 export const PriceRow = styled(Box)<BoxProps>(() => ({
@@ -119,4 +131,46 @@ export const TransparentSwipeableDrawer = styled(SwipeableDrawer)(() => ({
     backgroundColor: 'transparent',
     boxShadow: 'none',
   },
+}))
+
+export const HeaderActions = styled(Box)(() => ({
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: 34,
+}))
+
+export const LocationIcon = styled(LocationOnOutlined)(({ theme }) => ({
+  color: theme.palette.common.black,
+}))
+
+export const MenuIcon = styled(Menu)(({ theme }) => ({
+  color: theme.palette.common.black,
+}))
+
+export const BackButton = styled(Link)(({ theme }) => ({
+  minWidth: '40px',
+  width: '60px',
+  height: '60px',
+  padding: 0,
+  borderRadius: '40%',
+  border: `1px solid ${theme.palette.grey[300]}`,
+  color: theme.palette.common.black,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'relative',
+
+  '&:hover': {
+    backgroundColor: theme.palette.grey[100],
+  },
+}))
+
+export const StyledArrowBackIos = styled(ArrowBackIos)(() => ({
+  fontSize: 24,
+  position: 'absolute',
+  left: '55%',
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
 }))

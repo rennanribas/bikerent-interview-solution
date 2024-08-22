@@ -1,11 +1,15 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import BikeDetails from './BikeDetails.component'
 import { useBike } from 'context/BikeContext'
+import { useMediaQuery } from '@mui/material'
+import theme from 'styles/theme'
+import BikeDetailsMobile from './layouts/BikeDetails.mobile'
+import BikeDetailsDesktop from './layouts/desktop/BikeDetails.desktop'
 
 const BikeDetailsContainer = () => {
   const { bike } = useBike()
   const router = useRouter()
+  const isMobileScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   useEffect(() => {
     if (!bike) {
@@ -13,7 +17,7 @@ const BikeDetailsContainer = () => {
     }
   }, [bike, router])
 
-  return <BikeDetails bike={bike} />
+  return isMobileScreen ? <BikeDetailsMobile /> : <BikeDetailsDesktop />
 }
 
 export default BikeDetailsContainer

@@ -1,10 +1,9 @@
-import { Box, Breadcrumbs, Divider, Link as MuiLink, Typography } from '@mui/material'
+import { Box, Breadcrumbs, Divider, Typography, Link as MuiLink } from '@mui/material'
 import BikeImageSelector from 'components/BikeImageSelector'
 import BikeSpecs from 'components/BikeSpecs'
 import BikeType from 'components/BikeType'
 import BookingAddressMap from 'components/BookingAddressMap'
 import Header from 'components/Header'
-import Bike from 'models/Bike'
 import {
   BreadcrumbContainer,
   BreadcrumbHome,
@@ -14,23 +13,19 @@ import {
   FavoriteIcon,
   LikeButton,
   PriceRow,
-} from './BikeDetails.styles'
-import NextLink from 'next/link'
-import Overview from 'components/Booking/Overview'
+} from './BikeDetails.desktop.styles'
 import Booking from 'components/Booking'
+import { useBike } from 'context/BikeContext'
+import NextLink from 'next/link'
 
-interface BikeDetailsProps {
-  bike?: Bike
-}
-
-const BikeDetails = ({ bike }: BikeDetailsProps) => {
+const BikeDetailsDesktop = () => {
+  const { bike } = useBike()
   const rateByDay = bike?.rate || 0
   const rateByWeek = rateByDay * 7
 
   return (
     <div data-testid='bike-details-page'>
       <Header />
-
       <BreadcrumbContainer data-testid='bike-details-breadcrumbs'>
         <Breadcrumbs separator={<BreadcrumbSeparator />}>
           <NextLink href='/' passHref>
@@ -113,4 +108,4 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
   )
 }
 
-export default BikeDetails
+export default BikeDetailsDesktop
