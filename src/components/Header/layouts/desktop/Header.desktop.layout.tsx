@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs, Typography, Link as MuiLink } from '@mui/material'
+import { Box, Typography} from '@mui/material'
 import NextLink from 'next/link'
 import {
   Actions,
@@ -10,11 +10,9 @@ import {
   Title,
 } from './Header.desktop.styles'
 import { useAuth } from 'context/AuthContext'
-import { useBike } from 'context/BikeContext'
 
 const DesktopHeader = () => {
   const { isAuthenticated, user, logout } = useAuth()
-  const { bike } = useBike()
 
   return (
     <Container data-testid='header'>

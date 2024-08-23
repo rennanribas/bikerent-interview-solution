@@ -30,6 +30,7 @@ export const ArrowButtons = styled('button')(({ disabled }) => ({
   justifyContent: 'center',
   borderWidth: '1px',
   borderColor: theme.palette.common.white,
+  color: theme.palette.common.white,
   backgroundColor: 'transparent',
   borderStyle: 'solid',
   borderRadius: '20px',

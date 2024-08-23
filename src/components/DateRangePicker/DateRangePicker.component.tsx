@@ -1,4 +1,3 @@
-import { ArrowRightIcon } from 'assets/icons/ArrowRight'
 import {
   ArrowButtons,
   ArrowsContainer,
@@ -13,12 +12,12 @@ import {
   SelectedDayCircleContainer,
 } from './DateRangePicker.styles'
 import { Box, Typography } from '@mui/material'
-import { ArrowLeftIcon } from 'assets/icons/ArrowLeft'
 import { daysOfTheWeek, generateDate, months } from './DateRangePicker.utils'
 import dayjs from 'dayjs'
 import { useDateRangePicker } from './hooks/useDateRangePicker'
 import theme from 'styles/theme'
 import { CalendarComponentProps } from './DateRangePicker.types'
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material'
 
 const DateRangePicker = (props: CalendarComponentProps) => {
   const { selectedMonth, today, selectedYear, onNextMonth, onPrevMonth, onDayClick, period } =
@@ -51,10 +50,10 @@ const DateRangePicker = (props: CalendarComponentProps) => {
             onClick={onPrevMonth}
             disabled={today.month() === selectedMonth && selectedYear === today.year()}
           >
-            <ArrowLeftIcon />
+            <ArrowBackIos />
           </ArrowButtons>
           <ArrowButtons data-testid='next-month-button' onClick={onNextMonth}>
-            <ArrowRightIcon />
+            <ArrowForwardIos />
           </ArrowButtons>
         </ArrowsContainer>
       </Header>

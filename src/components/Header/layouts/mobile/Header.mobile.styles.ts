@@ -1,6 +1,5 @@
 import { Box, styled, Typography, TypographyProps } from '@mui/material'
 import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined'
-import Menu from '@mui/icons-material/Menu'
 
 export const Container = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,

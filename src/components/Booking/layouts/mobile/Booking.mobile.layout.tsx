@@ -17,13 +17,13 @@ import {
   ContentWrapper,
 } from './Booking.mobile.styles'
 import DateRangePicker from 'components/DateRangePicker'
-import { CalendarIcon } from 'assets/icons/Calendar'
 import { useBooking } from '../../hooks/useBooking'
 import Booked from 'components/Booking/Booked'
 import MobileMenu from 'components/MobileMenu/Menu.component'
 import Link from 'next/link'
 import BikeCardMini from 'components/BikeCardMini'
 import { useBike } from 'context/BikeContext'
+import { CalendarMonth } from '@mui/icons-material'
 
 const MobileBooking = () => {
   const {
@@ -77,7 +77,7 @@ const MobileBooking = () => {
           </Typography>
 
           <MobileDatePicker onClick={toggleMobileDrawer}>
-            <CalendarIcon />
+            <CalendarMonth />
             {mobileDataLabel}
           </MobileDatePicker>
         </Box>

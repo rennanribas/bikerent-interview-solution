@@ -1,6 +1,5 @@
 import { Divider, IconButton, Typography } from '@mui/material'
 import BikeType from 'components/BikeType'
-import BikePlaceholder from 'assets/bike-placeholder.png'
 import Bike from 'models/Bike'
 import {
   Container,
@@ -12,6 +11,7 @@ import {
   FavoriteIcon,
   BikeImage,
 } from './BikeCard.styles'
+import Image from 'next/image'
 
 type JustDisplayedBikeData = Omit<Bike, 'candidateId' | 'maxLoad' | 'ratings'>
 
@@ -55,12 +55,12 @@ const BikeCard = ({
       >
         <ImageContainer>
           {!isImageLoaded && (
-            <img
-              src={BikePlaceholder}
-              width='100%'
-              alt='Bike Placeholder Image'
-              placeholder={BikePlaceholder}
-            />
+            <Image
+            src="/bike-placeholder.png"
+            alt="Bike Placeholder Image"
+            layout="fill"
+            objectFit="cover"
+          />
           )}
 
           <BikeImage

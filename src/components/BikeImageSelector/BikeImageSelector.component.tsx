@@ -1,6 +1,6 @@
 import BikeImageList from 'components/BikeImageList'
 import { BikeImage, Container } from './BikeImageSelector.styles'
-import BikePlaceholder from 'assets/bike-placeholder.png'
+import Image from 'next/image'
 
 interface BikeImageSelectorComponentProps {
   selectedImageUrl: string
@@ -29,11 +29,11 @@ const BikeImageSelector = ({
       />
 
       {!isImageLoaded && (
-        <img
-          src={BikePlaceholder}
-          width='100%'
-          height='100%'
+        <Image
+          src='/bike-placeholder.png'
           alt="Bigger bike's image Placeholder"
+          layout='fill'
+          objectFit='cover'
         />
       )}
 

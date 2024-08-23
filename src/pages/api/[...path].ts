@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
-import jwt from 'jsonwebtoken'
 
 export const apiServer = axios.create({
   baseURL: process.env.API_DOMAIN,
