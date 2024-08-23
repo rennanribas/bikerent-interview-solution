@@ -1,10 +1,10 @@
 import React from 'react'
 import { AppProps } from 'next/app'
-import '../src/styles/global.css'
+import 'styles/global.css'
 import { BikeProvider } from 'context/BikeContext'
 import { ThemeProvider } from '@mui/material'
-import theme from '../src/styles/theme'
 import { AuthProvider } from 'context/AuthContext'
+import theme from 'styles/theme'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (

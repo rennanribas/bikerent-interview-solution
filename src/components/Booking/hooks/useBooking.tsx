@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
 import { Period } from 'components/DateRangePicker/DateRangePicker.types'
 import { abreviatedMonths } from 'components/DateRangePicker/DateRangePicker.utils'
-import { apiServer } from '../../../../pages/api/[...path]'
+import { apiServer } from '../../../pages/api/[...path]'
 import { useAuth } from 'context/AuthContext'
 import { useBike } from 'context/BikeContext'
 import { AxiosError } from 'axios'

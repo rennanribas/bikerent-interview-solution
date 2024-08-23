@@ -1,4 +1,4 @@
-import { apiServer } from '../../pages/api/[...path]'
+import { apiServer } from '../pages/api/[...path]'
 import Bike from 'models/Bike'
 
 export const bikeService = {
