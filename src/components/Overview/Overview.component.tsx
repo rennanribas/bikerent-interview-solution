@@ -8,7 +8,13 @@ const Overview: React.FC = () => {
 
   return (
     <OverviewContainer data-testid='overview-container'>
-      <Typography variant='h2' fontSize={16} marginBottom={1.25} marginTop={'22px'}>
+      <Typography
+        variant='h2'
+        fontSize={16}
+        marginBottom={1.25}
+        marginTop={'22px'}
+        data-testid='overview-title'
+      >
         Booking Overview
       </Typography>
 
