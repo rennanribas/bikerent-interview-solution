@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Divider, Typography } from '@mui/material'
 import { OverviewContainer, PriceRow, InfoIcon } from './Overview.styles'
-import { useBooking } from '../hooks/useBooking'
+import { useBooking } from '../Booking/hooks/useBooking'
 
 const Overview: React.FC = () => {
   const { rentAmount, totalAmount, servicesFee } = useBooking()

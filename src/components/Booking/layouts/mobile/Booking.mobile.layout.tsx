@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import Overview from 'components/Booking/Overview'
+import Overview from 'components/Overview'
 import {
   MobileDatePicker,
   MobileSelectDateButton,
@@ -18,7 +18,7 @@ import {
 } from './Booking.mobile.styles'
 import DateRangePicker from 'components/DateRangePicker'
 import { useBooking } from '../../hooks/useBooking'
-import Booked from 'components/Booking/Booked'
+import Booked from 'components/Booked'
 import MobileMenu from 'components/MobileMenu/Menu.component'
 import Link from 'next/link'
 import BikeCardMini from 'components/BikeCardMini'

@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material'
-import Overview from 'components/Booking/Overview'
+import Overview from 'components/Overview'
 import { DateRangePickerContainer, BookingContainer, BookingButton } from './Booking.desktop.styles'
 import DateRangePicker from 'components/DateRangePicker'
 import { useBooking } from '../../hooks/useBooking'
-import Booked from 'components/Booking/Booked'
+import Booked from 'components/Booked'
 
 const DesktopBooking = () => {
   const { onChangePeriod, handleBooking, isBooked } = useBooking()
