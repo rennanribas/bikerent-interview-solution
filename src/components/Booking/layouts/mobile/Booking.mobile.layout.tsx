@@ -122,7 +122,7 @@ const MobileBooking = () => {
         </StyledDrawer>
       </TransparentSwipeableDrawer>
 
-      <BookedModal open={true} onClose={() => setBike()}>
+      <BookedModal open={isBooked} onClose={() => setBike()}>
         <Booked />
       </BookedModal>
     </BookingContainer>

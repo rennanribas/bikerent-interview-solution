@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useBike } from 'context/BikeContext'
 import { useMediaQuery } from '@mui/material'
 import theme from 'styles/theme'
-import BikeDetailsMobile from './layouts/BikeDetails.mobile'
+import BikeDetailsMobile from './layouts/mobile/BikeDetails.mobile'
 import BikeDetailsDesktop from './layouts/desktop/BikeDetails.desktop'
 
 const BikeDetailsContainer = () => {
