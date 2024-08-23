@@ -1,11 +1,20 @@
-import { BikeImage, BikeDetailContainer, Container, BikeNameContainer } from './Booked.styles'
-import { Typography } from '@mui/material'
+import {
+  BikeImage,
+  BikeDetailContainer,
+  Container,
+  BikeNameContainer,
+  ButtonHome,
+  ButtonWrapper,
+} from './Booked.styles'
+import { Typography, useMediaQuery } from '@mui/material'
 import theme from 'styles/theme'
 import BikeType from 'components/BikeType'
 import { useBike } from 'context/BikeContext'
+import Link from 'next/link'
 
 const Booked = () => {
   const { bike } = useBike()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   return (
     <Container>
       <Typography fontSize={24} fontWeight={'bold'} color={theme.palette.common.black}>
@@ -21,6 +30,18 @@ const Booked = () => {
           <BikeType type={bike?.type} />
         </BikeNameContainer>
       </BikeDetailContainer>
+      {isMobile && (
+        <Link href='/'>
+          <ButtonHome
+            variant='contained'
+            color='primary'
+            disableElevation
+            data-testid='rent-button'
+          >
+            <ButtonWrapper>Go to Home Page</ButtonWrapper>
+          </ButtonHome>
+        </Link>
+      )}
     </Container>
   )
 }

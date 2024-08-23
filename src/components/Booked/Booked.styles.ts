@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material'
+import { Box, styled, Button } from '@mui/material'
 import theme from 'styles/theme'
 
 export const Container = styled(Box)(() => ({
@@ -39,4 +39,31 @@ export const BikeNameContainer = styled(Box)(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+}))
+
+export const ButtonWrapper = styled(Box)(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+}))
+
+export const ButtonHome = styled(Button)(({ theme }) => ({
+  borderRadius: '20px',
+  backgroundColor: theme.palette.primary.main,
+  fontSize: '20px',
+  fontWeight: 700,
+  color: theme.palette.common.white,
+  textTransform: 'none',
+  transition: 'all 0.3s ease-in-out',
+
+  ':active': {
+    backgroundColor: theme.palette.secondary.main,
+    opacity: 0.8,
+  },
+
+  ':hover': {
+    backgroundColor: theme.palette.secondary.main,
+    opacity: 0.8,
+  },
 }))

@@ -5,6 +5,7 @@ import { apiServer } from '../../../pages/api/[...path]'
 import { useAuth } from 'context/AuthContext'
 import { useBike } from 'context/BikeContext'
 import { AxiosError } from 'axios'
+import { bikeService } from 'services/bike.service'
 
 type BookingContextType = ReturnType<typeof useBookingState>
 
@@ -21,30 +22,46 @@ const useBookingState = () => {
   const [isBooked, setIsBooked] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [openBookedModal, setOpenBookedModal] = useState<boolean>(false)
-  const [rentAmount, setRentAmount] = useState<number>(0)
-  const [totalAmount, setTotalAmount] = useState<number>(0)
-  const [servicesFee, setServicesFee] = useState<number>(0)
+  const [rentAmount, setRentAmount] = useState<string>('0')
+  const [totalAmount, setTotalAmount] = useState<string>('0')
+  const [servicesFee, setServicesFee] = useState<string>('0')
   const [isRenting, setIsRenting] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
 
   const toggleBookedModal = () => setOpenBookedModal((state) => !state)
   const toggleBooked = () => setIsBooked((state) => !state)
   const toggleMobileDrawer = () => setOpenMobileDrawer((state) => !state)
 
   const onChangePeriod = async (period: Partial<Period>) => {
-    if (period.startDate && period.endDate) {
-      const response = await apiServer.post('/api/bikes/amount', {
-        bikeId: bike?.id,
-        dateFrom: period.startDate.format('YYYY-MM-DD'),
-        dateTo: period.endDate.format('YYYY-MM-DD'),
-        userId: user?.id,
-      })
-      const data = response.data
-      setRentAmount(data.rentAmount.toFixed(2))
-      setTotalAmount(data.totalAmount.toFixed(2))
-      setServicesFee(data.fee.toFixed(2))
+    if (!period.startDate || !period.endDate) {
+      setRentAmount('0')
+      setTotalAmount('0')
+      setServicesFee('0')
+      setError(null)
+      return
+    }
+    if (period.startDate && period.endDate && bike && user) {
+      try {
+        setIsLoading(true)
+        const response = await bikeService.getRentAmount({
+          bikeId: bike.id,
+          dateFrom: period.startDate.format('YYYY-MM-DD'),
+          dateTo: period.endDate.format('YYYY-MM-DD'),
+          userId: user.id,
+        })
+        setRentAmount(response.rentAmount.toFixed(2))
+        setTotalAmount(response.totalAmount.toFixed(2))
+        setServicesFee(response.fee.toFixed(2))
+        setError(null)
+      } catch (error: any) {
+        setError(error.message)
+      } finally {
+        setIsLoading(false)
+      }
     }
     setSelectedPeriod(period)
   }
+
   const mobileDataLabel = useMemo(() => {
     return `From ${
       selectedPeriod.startDate ? abreviatedMonths[selectedPeriod.startDate.month()] : '--'
@@ -96,6 +113,7 @@ const useBookingState = () => {
     handleBooking,
     isRenting,
     setIsRenting,
+    error,
   }
 }
 export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

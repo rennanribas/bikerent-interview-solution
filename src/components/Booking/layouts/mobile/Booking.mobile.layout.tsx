@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Alert, Box, Typography } from '@mui/material'
 import Overview from 'components/Overview'
 import {
   MobileDatePicker,
@@ -34,6 +34,7 @@ const MobileBooking = () => {
     openMobileDrawer,
     handleBooking,
     isBooked,
+    error,
   } = useBooking()
   const { setBike } = useBike()
 
@@ -62,6 +63,11 @@ const MobileBooking = () => {
             Booking
           </Typography>
         </Box>
+        {error && (
+          <Alert color='error' sx={{ mt: 2 }}>
+            Error: {error}
+          </Alert>
+        )}
 
         <BikeCardMini />
 
@@ -77,7 +83,7 @@ const MobileBooking = () => {
           </Typography>
 
           <MobileDatePicker onClick={toggleMobileDrawer}>
-            <CalendarMonth />
+            <CalendarMonth color='primary' />
             {mobileDataLabel}
           </MobileDatePicker>
         </Box>
@@ -91,6 +97,7 @@ const MobileBooking = () => {
           variant='contained'
           data-testid='rent-booking-button'
           onClick={handleBooking}
+          disabled={!selectedPeriod.startDate || !selectedPeriod.endDate}
         >
           Add to booking
         </BookingButton>
@@ -115,7 +122,7 @@ const MobileBooking = () => {
         </StyledDrawer>
       </TransparentSwipeableDrawer>
 
-      <BookedModal open={isBooked} onClose={() => setBike()}>
+      <BookedModal open={true} onClose={() => setBike()}>
         <Booked />
       </BookedModal>
     </BookingContainer>
