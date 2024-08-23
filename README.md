@@ -102,16 +102,14 @@ It launches the test runner in the interactive watch mode.
 ## Overview
 
 ### Desktop
-
-https://user-images.githubusercontent.com/42481884/200061794-1ec4771f-de22-4007-9952-3d36b44feed2.mp4
+https://github.com/user-attachments/assets/7f721cbe-2d40-4117-a05e-a250e1cd30a3.mov
 
 ### Mobile
+https://github.com/user-attachments/assets/05322b63-7995-48e6-ae7b-18de84d4d1b0.mov
 
-https://user-images.githubusercontent.com/42481884/200061823-e73cd233-8a32-417c-a4ef-af38f81a6824.mp4
 
 ## Test coverage
-
-<img width="487" alt="Test Coverage" src="https://user-images.githubusercontent.com/42481884/200062093-f0dcd641-e994-4248-acef-5c24bc0bc2e6.png">
+![image](https://github.com/user-attachments/assets/a1a46524-aa6f-4ffa-8610-60f4222ca13c)
 
 ## Author
 
