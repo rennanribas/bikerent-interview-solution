@@ -3,7 +3,7 @@ import {
   BoxProps,
   Button,
   ButtonProps,
-  Link,
+  Typography,
   Modal,
   styled,
   SwipeableDrawer,
@@ -150,7 +150,7 @@ export const MenuIcon = styled(Menu)(({ theme }) => ({
   color: theme.palette.common.black,
 }))
 
-export const BackButton = styled(Link)(({ theme }) => ({
+export const BackButton = styled(Typography)(({ theme }) => ({
   minWidth: '40px',
   width: '60px',
   height: '60px',

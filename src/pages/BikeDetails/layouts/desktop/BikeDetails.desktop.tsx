@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs, Divider, Typography, Link as MuiLink } from '@mui/material'
+import { Box, Breadcrumbs, Divider, Typography } from '@mui/material'
 import BikeImageSelector from 'components/BikeImageSelector'
 import BikeSpecs from 'components/BikeSpecs'
 import BikeType from 'components/BikeType'
@@ -29,9 +29,20 @@ const BikeDetailsDesktop = () => {
       <BreadcrumbContainer data-testid='bike-details-breadcrumbs'>
         <Breadcrumbs separator={<BreadcrumbSeparator />}>
           <NextLink href='/' passHref>
-            <MuiLink underline='hover' display='flex' alignItems='center' color='white'>
+            <Typography
+              component='span'
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                color: 'white',
+                textDecoration: 'none',
+                '&:hover': {
+                  textDecoration: 'underline',
+                },
+              }}
+            >
               <BreadcrumbHome />
-            </MuiLink>
+            </Typography>
           </NextLink>
 
           <Typography fontWeight={800} letterSpacing={1} color='white'>

@@ -25,10 +25,10 @@ const DateRangePicker = (props: CalendarComponentProps) => {
 
   return (
     <Container>
-      <Header data-testid='calendar-header'>
+      <Header data-testid='datepicker-header'>
         <Box>
           <Typography
-            data-testid='calendar-month'
+            data-testid='datepicker-month'
             fontSize={34}
             fontWeight={700}
             lineHeight={'39px'}
@@ -36,7 +36,7 @@ const DateRangePicker = (props: CalendarComponentProps) => {
             {months[selectedMonth]}
           </Typography>
           <Typography
-            data-testid='calendar-year'
+            data-testid='datepicker-year'
             fontSize={16}
             fontWeight={600}
             sx={{ opacity: 0.5 }}

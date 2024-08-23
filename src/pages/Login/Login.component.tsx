@@ -1,4 +1,4 @@
-import { InputAdornment, Typography, Link } from '@mui/material'
+import { InputAdornment, Typography } from '@mui/material'
 import {
   Container,
   ErrorMessage,
@@ -35,10 +35,10 @@ const Login = () => {
         </HomeButton>
       </NextLink>
       <LoginCard>
-        <Title color='primary' variant='h1'>
+        <Title color='primary' variant='h1' data-testid='title-login'>
           Welcome Back
         </Title>
-        <Typography variant='subtitle1' align='center'>
+        <Typography variant='subtitle1' align='center' data-testid='subtitle-login'>
           Enter your credentials to access your account
         </Typography>
         <Form data-testid='form-container' onSubmit={onSubmit}>
@@ -49,6 +49,7 @@ const Login = () => {
             error={!!errors.email?.message}
             label='Email'
             type='email'
+            placeholder='Email'
             fullWidth
             InputProps={{
               startAdornment: (
@@ -66,6 +67,7 @@ const Login = () => {
             {...register('password')}
             label='Password'
             type='password'
+            placeholder='Password'
             fullWidth
             InputProps={{
               startAdornment: (
@@ -77,9 +79,11 @@ const Login = () => {
           />
           {errors.password?.message && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
 
-          <Link href='#' variant='body2' align='right'>
-            Forgot Password?
-          </Link>
+          <NextLink href='#' passHref>
+            <Typography align='right' color='primary'>
+              Forgot Password?
+            </Typography>
+          </NextLink>
 
           <SubmitButton
             data-testid='login-button'
@@ -88,13 +92,13 @@ const Login = () => {
             disableElevation
             fullWidth
           >
-            Login
+            Submit
           </SubmitButton>
         </Form>
         <Typography variant='body2' align='center'>
           Do not have an account?{' '}
           <NextLink href='/Signup' passHref>
-            <Link color='primary'>Sign up</Link>
+            <Typography color='primary'>Sign up</Typography>
           </NextLink>
         </Typography>
       </LoginCard>

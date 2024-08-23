@@ -35,10 +35,10 @@ const Signup = () => {
         </HomeButton>
       </NextLink>
       <SignupCard>
-        <Title color='primary' variant='h1'>
+        <Title color='primary' variant='h1' data-testid='title-signup'>
           Create Account
         </Title>
-        <Typography variant='subtitle1' align='center'>
+        <Typography variant='subtitle1' align='center' data-testid='subtitle-signup'>
           Sign up to start renting bikes
         </Typography>
         <Form data-testid='form-container' onSubmit={onSubmit}>

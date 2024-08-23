@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
-import BikeDetails from './BikeDetails.container'
+import BikeDetailsDesktop from './BikeDetails.desktop'
 import mockRouter from 'next-router-mock'
 import { AuthProvider } from 'context/AuthContext'
 import { BikeProvider } from 'context/BikeContext'
@@ -24,13 +24,13 @@ const renderWithProviders = (component: React.ReactNode) => {
   )
 }
 
-describe('BikeDetails', () => {
+describe('BikeDetailsDesktop', () => {
   beforeEach(() => {
     mockRouter.push('/BikeDetails')
   })
 
-  it('renders bike details components', async () => {
-    renderWithProviders(<BikeDetails />)
+  it('renders bike details components for desktop', async () => {
+    renderWithProviders(<BikeDetailsDesktop />)
 
     await waitFor(() => {
       expect(screen.getByTestId('bike-details-page')).toBeInTheDocument()

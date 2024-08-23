@@ -1,3 +1,3 @@
-import Booked from './Booked.component'
+import { Booked } from './Booked.component'
 
 export default Booked

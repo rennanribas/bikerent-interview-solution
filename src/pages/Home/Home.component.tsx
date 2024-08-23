@@ -2,18 +2,22 @@ import Header from 'components/Header'
 import BikeList from 'components/BikeList'
 import Bike from 'models/Bike'
 import { Content } from './Home.styles'
+import { useEffect, useState } from 'react'
+import { useBike } from 'context/BikeContext'
 
-interface HomeProps {
-  bikes: Bike[]
-}
+const Home = () => {
+  const { setBike } = useBike()
 
-const Home = ({ bikes }: HomeProps) => {
+  useEffect(() => {
+    setBike()
+  }, [])
+
   return (
     <div data-testid='home-page'>
       <Header />
 
       <Content>
-        {bikes.length > 0 ? <BikeList bikes={bikes} /> : <p>No bikes available at the moment.</p>}
+          <BikeList />
       </Content>
     </div>
   )

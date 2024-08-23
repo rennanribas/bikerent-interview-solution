@@ -23,7 +23,7 @@ const MobileMenu = () => {
 
   return (
     <>
-      <IconButton onClick={handleToggleIsMenuOpen}>
+      <IconButton onClick={handleToggleIsMenuOpen} data-testid='mobile-menu-button'>
         <MenuIcon
           sx={bike ? { color: theme.palette.common.black } : { color: theme.palette.common.white }}
         />

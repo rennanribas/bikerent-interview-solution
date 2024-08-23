@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
-import BikeDetails from './BikeDetails.container'
+import BikeDetailsMobile from './BikeDetails.mobile'
 import mockRouter from 'next-router-mock'
 import { AuthProvider } from 'context/AuthContext'
 import { BikeProvider } from 'context/BikeContext'
@@ -24,23 +24,24 @@ const renderWithProviders = (component: React.ReactNode) => {
   )
 }
 
-describe('BikeDetails', () => {
+describe('BikeDetailsMobile', () => {
   beforeEach(() => {
     mockRouter.push('/BikeDetails')
   })
 
-  it('renders bike details components', async () => {
-    renderWithProviders(<BikeDetails />)
+  it('renders bike details components for mobile', async () => {
+    renderWithProviders(<BikeDetailsMobile />)
 
     await waitFor(() => {
       expect(screen.getByTestId('bike-details-page')).toBeInTheDocument()
-      expect(screen.getByTestId('header')).toBeInTheDocument()
-      expect(screen.getByTestId('bike-details-breadcrumbs')).toBeInTheDocument()
-      expect(screen.getByTestId('bike-details-container')).toBeInTheDocument()
+      expect(screen.getByTestId('bike-top-drawer')).toBeInTheDocument()
+      expect(screen.getByTestId('bike-top-container')).toBeInTheDocument()
       expect(screen.getByTestId('bike-image-selector')).toBeInTheDocument()
+      expect(screen.getByTestId('bike-details-container')).toBeInTheDocument()
       expect(screen.getByTestId('bike-name-details')).toBeInTheDocument()
       expect(screen.getByTestId('bike-prices-details')).toBeInTheDocument()
       expect(screen.getByTestId('booking-address-map')).toBeInTheDocument()
+      expect(screen.getByTestId('rent-button')).toBeInTheDocument()
     })
   })
 })

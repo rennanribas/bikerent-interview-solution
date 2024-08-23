@@ -1,33 +1,42 @@
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
 import Login from './Login.component'
+import mockRouter from 'next-router-mock'
+import { AuthProvider } from 'context/AuthContext'
+import { BikeProvider } from 'context/BikeContext'
+import { ThemeProvider } from '@mui/material'
+import theme from 'styles/theme'
 
-describe('Login page', () => {
+jest.mock('next/router', () => require('next-router-mock'))
+jest.mock('./hooks/useLogin', () => ({
+  useLogin: () => ({
+    errors: {},
+    register: jest.fn(),
+    onSubmit: jest.fn(),
+  }),
+}))
+
+const renderWithProviders = (component: React.ReactNode) => {
+  return render(
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
+        <BikeProvider>{component}</BikeProvider>
+      </AuthProvider>
+    </ThemeProvider>,
+  )
+}
+
+describe('Login', () => {
   beforeEach(() => {
-    render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>,
-    )
+    mockRouter.push('/Login')
   })
+  it('renders login components', () => {
+    renderWithProviders(<Login />)
 
-  it('should have a header', () => {
-    const headerElement = screen.getByText(/Login/i)
-    expect(headerElement).toBeInTheDocument()
-  })
-
-  it('should have an email input field', () => {
-    const emailInput = screen.getByPlaceholderText(/Email/i)
-    expect(emailInput).toBeInTheDocument()
-  })
-
-  it('should have a password input field', () => {
-    const passwordInput = screen.getByPlaceholderText(/Password/i)
-    expect(passwordInput).toBeInTheDocument()
-  })
-
-  it('should have a submit button', () => {
-    const submitButton = screen.getByRole('button', { name: /Submit/i })
-    expect(submitButton).toBeInTheDocument()
+    expect(screen.getByTestId('title-login')).toBeInTheDocument()
+    expect(screen.getByTestId('subtitle-login')).toBeInTheDocument()
+    expect(screen.getByTestId('email-input')).toBeInTheDocument()
+    expect(screen.getByTestId('password-input')).toBeInTheDocument()
+    expect(screen.getByTestId('login-button')).toBeInTheDocument()
   })
 })

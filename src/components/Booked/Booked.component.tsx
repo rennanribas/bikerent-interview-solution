@@ -12,7 +12,7 @@ import BikeType from 'components/BikeType'
 import { useBike } from 'context/BikeContext'
 import Link from 'next/link'
 
-const Booked = () => {
+export const Booked = () => {
   const { bike } = useBike()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   return (
@@ -45,5 +45,3 @@ const Booked = () => {
     </Container>
   )
 }
-
-export default Booked

@@ -1,28 +1,22 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { mockedBike } from 'mocks/Bike'
-import BikeCard from './BikeCard.container'
+import BikeCardMini from './BikeCardMini.component'
 import { BikeProvider } from 'context/BikeContext'
 
 jest.mock('next/router', () => require('next-router-mock'))
 jest.mock('context/BikeContext', () => ({
   ...jest.requireActual('context/BikeContext'),
-  useBike: () => ({ setBike: jest.fn() }),
+  useBike: () => ({ bike: mockedBike }),
 }))
 
 const renderWithProviders = (component: React.ReactNode) => {
   return render(<BikeProvider>{component}</BikeProvider>)
 }
 
-describe('BikeCard component', () => {
+describe('BikeCardMini component', () => {
   beforeEach(() => {
-    renderWithProviders(<BikeCard bike={mockedBike} isAvailable={true} />)
-  })
-
-  it('should render the bike card when available', () => {
-    const cardElement = screen.getByTestId('bike-card')
-    expect(cardElement).toBeInTheDocument()
-    expect(cardElement).not.toBeDisabled()
+    renderWithProviders(<BikeCardMini />)
   })
 
   it('should render the bike image', () => {
@@ -32,9 +26,8 @@ describe('BikeCard component', () => {
   })
 
   it('should render the bike name', () => {
-    const nameElement = screen.getByTestId('bike-name')
+    const nameElement = screen.getByText(mockedBike.name)
     expect(nameElement).toBeInTheDocument()
-    expect(nameElement).toHaveTextContent(mockedBike.name)
   })
 
   it('should render the bike type', () => {
@@ -46,6 +39,6 @@ describe('BikeCard component', () => {
   it('should render the bike price per day', () => {
     const priceElement = screen.getByTestId('bike-price-day')
     expect(priceElement).toBeInTheDocument()
-    expect(priceElement).toHaveTextContent(`${mockedBike.rate} €`)
+    expect(priceElement).toHaveTextContent(`${mockedBike.rate} €/Day`)
   })
 })
