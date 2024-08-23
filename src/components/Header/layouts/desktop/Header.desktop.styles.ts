@@ -59,3 +59,16 @@ export const SignUpButton = styled(Button)<ButtonProps>(({ theme }) => ({
     backgroundColor: theme.palette.primary.light,
   },
 }))
+
+export const LogOutButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  color: theme.palette.common.white,
+  borderRadius: 16,
+  textTransform: 'none',
+  fontSize: 16,
+  margin: '0 30px',
+  border: '1px solid white',
+
+  '&:hover': {
+    color: theme.palette.primary.light,
+  },
+}))

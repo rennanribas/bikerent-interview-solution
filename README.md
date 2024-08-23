@@ -1,14 +1,31 @@
-# Bike Rental Boilerplate - ReactJS
+# Bike Rental Application - NextJS
 
-![React Native](https://img.shields.io/badge/react-18.2.0-green?style=flat-square) ![TypeScript](https://img.shields.io/badge/-TypeScript-blue?style=flat-square)
+![Next.js](https://img.shields.io/badge/next.js-14.2.5-black?style=flat-square) ![React](https://img.shields.io/badge/react-18.3.1-blue?style=flat-square) ![TypeScript](https://img.shields.io/badge/-TypeScript-blue?style=flat-square)
 
-This project was created for the Trio Challenge, where candidates must create a functional system to rent bikes.
+This project was created for the Trio Challenge, where candidates must create a functional system to rent bikes. Originally developed with React, I migrated it to Next.js to showcase my skills for a NextJS Frontend Developer position and to leverage the advantages of server-side rendering and API routes.
 
-## Stack used
+## Tech Stack
 
-- [ReactJS](https://reactjs.org/docs/getting-started.html)
-- [TypeScript](https://www.typescriptlang.org/docs/)
-- [Material UI](https://mui.com/pt/material-ui/getting-started/overview/)
+- [Next.js](https://nextjs.org/) (v14.2.5)
+- [React](https://reactjs.org/) (v18.3.1)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Material-UI](https://mui.com/) (v5.10.12)
+- [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing
+- [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) for code formatting
+
+## Why Next.js?
+
+Migrating from React to Next.js provided several technical advantages:
+
+1. **API Routes**: Next.js allows us to create API routes, enabling us to securely hide sensitive information like the candidate token from the client-side code.
+2. **Server-Side Rendering (SSR)**: Improved initial load time and SEO by rendering pages on the server.
+3. **Static Site Generation (SSG)**: Ability to pre-render pages at build time for even faster load times.
+4. **Improved Performance**: Automatic code splitting, optimized images, and font optimization.
+5. **Built-in Routing**: Simplified routing system based on the file system.
+6. **TypeScript Support**: Enhanced TypeScript integration out of the box.
+7. **API Middleware**: Easier implementation of authentication and error handling for API routes.
+
+These features not only improve the application's performance and security but also demonstrate proficiency in modern web development practices, aligning with the requirements of a NextJS Frontend Developer position.
 
 ## How to run it
 
@@ -44,46 +61,58 @@ It launches the test runner in the interactive watch mode.
 
 ## Folder structure
 
-- [assets/](./src/assets)
-  - [fonts/](./src/assets/fonts)
-- [components/](./src/components)
-  - [BikeCard/](./src/components/BikeCard)
-  - [BikeImageList/](./src/components/BikeImageList)
-  - [BikeImageSelector/](./src/components/BikeImageSelector)
-  - [BikeList/](./src/components/BikeList)
-  - [BikeSpecs/](./src/components/BikeSpecs)
-  - [BikeType/](./src/components/BikeType)
-  - [BookingAddressMap/](./src/components/BookingAddressMap)
-  - [Header/](./src/components/Header)
-- [mocks/](./src/mocks)
-  - [Bike.ts](./src/mocks/Bike.ts)
-- [models/](./src/models)
-  - [Bike.ts](./src/models/Bike.ts)
-- [pages/](./src/pages)
-  - [BikeDetails/](./src/pages/BikeDetails)
-  - [Home/](./src/pages/Home)
-  - [Login/](./src/pages/Login)
-- [routes/](./src/routes)
-  - [app.routes/](./src/routes/app.routes.tsx)
-  - [index/](./src/routes/index.tsx)
-  - [paths/](./src/routes/paths.ts)
-- [services/](./src/services)
-  - [api/](./src/services/api.ts)
-- [styles/](./src/styles)
-  - [global.css/](./src/styles/global.css)
-  - [theme/](./src/styles/theme.ts)
-- [App.tsx](./src/App.tsx)
+## Folder structure
+
+- src/
+  - assets/
+    - fonts/
+  - components/
+    - BikeCard/
+    - BikeImageList/
+    - BikeImageSelector/
+    - BikeList/
+    - BikeSpecs/
+    - BikeType/
+    - Booked/
+    - Booking/
+    - BookingAddressMap/
+    - Header/
+    - Overview/
+  - context/
+    - AuthContext.tsx
+    - BikeContext.tsx
+  - mocks/
+    - Bike.ts
+  - models/
+    - Bike.ts
+    - User.ts
+  - pages/
+    - BikeDetails/
+    - Home/
+    - Login/
+    - Signup/
+    - \_app.tsx
+    - index.tsx
+  - services/
+    - bike.service.ts
+  - styles/
+    - global.css
+    - theme.ts
 
 ## Overview
 
 ### Desktop
-
-https://user-images.githubusercontent.com/42481884/200061794-1ec4771f-de22-4007-9952-3d36b44feed2.mp4
+https://github.com/user-attachments/assets/7f721cbe-2d40-4117-a05e-a250e1cd30a3.mov
 
 ### Mobile
+https://github.com/user-attachments/assets/05322b63-7995-48e6-ae7b-18de84d4d1b0.mov
 
-https://user-images.githubusercontent.com/42481884/200061823-e73cd233-8a32-417c-a4ef-af38f81a6824.mp4
 
-## Test coverage (so far)
+## Test coverage
+![image](https://github.com/user-attachments/assets/a1a46524-aa6f-4ffa-8610-60f4222ca13c)
 
-<img width="487" alt="Captura de Tela 2022-11-04 às 16 06 44" src="https://user-images.githubusercontent.com/42481884/200062093-f0dcd641-e994-4248-acef-5c24bc0bc2e6.png">
+## Author
+
+Rennan Ribas
+
+Feel free to contact me if you have any questions or feedback about this project!

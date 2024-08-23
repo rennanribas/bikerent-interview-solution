@@ -1,20 +1,26 @@
-import Bike from 'models/Bike'
+// src/components/BikeCard.container.tsx
+import Bike from '../../models/Bike' // Adjusted import path
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Paths } from 'routes/paths'
+import { useRouter } from 'next/router'
 import BikeCard from './BikeCard.component'
+import { useBike } from 'context/BikeContext'
 
 interface BikeCardProps {
   bike: Bike
+  isAvailable: boolean
 }
 
-const BikeCardContainer = ({ bike }: BikeCardProps) => {
-  const navigate = useNavigate()
+const BikeCardContainer = ({ bike, isAvailable }: BikeCardProps) => {
+  const router = useRouter()
+  const { setBike } = useBike()
 
   const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   const handleOpenBikeDetails = () => {
-    navigate(Paths.BIKE_DETAILS, { state: { bike } })
+    if (isAvailable) {
+      setBike(bike)
+      router.push('/BikeDetails')
+    }
   }
 
   const handleIsImageLoaded = (isLoading: boolean) => {
@@ -34,6 +40,7 @@ const BikeCardContainer = ({ bike }: BikeCardProps) => {
       imageUrls={bike.imageUrls}
       cardImage={bike.imageUrls[0] || ''}
       rate={bike.rate}
+      isAvailable={isAvailable}
     />
   )
 }

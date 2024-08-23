@@ -1,6 +1,5 @@
 import { Divider, IconButton, Typography } from '@mui/material'
 import BikeType from 'components/BikeType'
-import BikePlaceholder from 'assets/bike-placeholder.png'
 import Bike from 'models/Bike'
 import {
   Container,
@@ -12,12 +11,14 @@ import {
   FavoriteIcon,
   BikeImage,
 } from './BikeCard.styles'
+import Image from 'next/image'
 
 type JustDisplayedBikeData = Omit<Bike, 'candidateId' | 'maxLoad' | 'ratings'>
 
 interface BikeCardComponentProps extends JustDisplayedBikeData {
   isImageLoaded: boolean
   cardImage: string
+  isAvailable: boolean
   handleOpenBikeDetails: () => void
   handleIsImageLoaded: (isLoading: boolean) => void
 }
@@ -30,6 +31,7 @@ const BikeCard = ({
   rate,
   handleOpenBikeDetails,
   handleIsImageLoaded,
+  isAvailable,
 }: BikeCardComponentProps) => {
   const LikeButton = (
     <IconButton>
@@ -37,19 +39,28 @@ const BikeCard = ({
     </IconButton>
   )
 
+  const notAvailableTypography = (
+    <Typography fontSize={24} fontWeight={700}>
+      Rented
+    </Typography>
+  )
+
   return (
     <Container variant='outlined' data-testid='bike-card'>
-      <Header action={LikeButton} />
+      <Header action={isAvailable ? LikeButton : notAvailableTypography} />
 
-      <div onClick={handleOpenBikeDetails}>
+      <div
+        onClick={handleOpenBikeDetails}
+        style={{ cursor: isAvailable ? 'pointer' : 'default', opacity: isAvailable ? 1 : 0.5 }}
+      >
         <ImageContainer>
           {!isImageLoaded && (
-            <img
-              src={BikePlaceholder}
-              width='100%'
-              alt='Bike Placeholder Image'
-              placeholder={BikePlaceholder}
-            />
+            <Image
+            src="/bike-placeholder.png"
+            alt="Bike Placeholder Image"
+            layout="fill"
+            objectFit="cover"
+          />
           )}
 
           <BikeImage

@@ -1,8 +1,19 @@
-import { Box, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
-import { Actions, Container, Icon, LoginButton, SignUpButton, Title } from './Header.desktop.styles'
+import { Box, Typography} from '@mui/material'
+import NextLink from 'next/link'
+import {
+  Actions,
+  Container,
+  Icon,
+  LoginButton,
+  LogOutButton,
+  SignUpButton,
+  Title,
+} from './Header.desktop.styles'
+import { useAuth } from 'context/AuthContext'
 
 const DesktopHeader = () => {
+  const { isAuthenticated, user, logout } = useAuth()
+
   return (
     <Container data-testid='header'>
       <Title data-testid='app-name'>Bike Rental</Title>
@@ -12,19 +23,36 @@ const DesktopHeader = () => {
           <Typography color='white' marginRight={0.75}>
             Manhattan
           </Typography>
-
           <Icon fontSize='small' />
         </Box>
 
-        <Link to='/login' data-testid='login-button'>
-          <LoginButton>Log in</LoginButton>
-        </Link>
+        {isAuthenticated ? (
+          <Box display='flex' alignItems='center'>
+            <Typography color='white' marginX={2}>
+              Welcome, {user?.name || 'User'}!
+            </Typography>
+            <LogOutButton color='inherit' onClick={logout}>
+              Logout
+            </LogOutButton>
+          </Box>
+        ) : (
+          <>
+            <NextLink href='/Login' passHref>
+              <LoginButton data-testid='login-button'>Log in</LoginButton>
+            </NextLink>
 
-        <Link to='/sign-up' data-testid='signup-button'>
-          <SignUpButton variant='contained' color='secondary' disableElevation>
-            Sign up
-          </SignUpButton>
-        </Link>
+            <NextLink href='/Signup' passHref>
+              <SignUpButton
+                variant='contained'
+                color='secondary'
+                disableElevation
+                data-testid='signup-button'
+              >
+                Sign up
+              </SignUpButton>
+            </NextLink>
+          </>
+        )}
       </Actions>
     </Container>
   )

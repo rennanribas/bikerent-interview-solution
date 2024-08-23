@@ -1,25 +1,23 @@
-import Bike from 'models/Bike'
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import BikeDetails from './BikeDetails.component'
-
-type StateReceived = {
-  bike: Bike
-}
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useBike } from 'context/BikeContext'
+import { useMediaQuery } from '@mui/material'
+import theme from 'styles/theme'
+import BikeDetailsMobile from './layouts/mobile/BikeDetails.mobile'
+import BikeDetailsDesktop from './layouts/desktop/BikeDetails.desktop'
 
 const BikeDetailsContainer = () => {
-  const { state } = useLocation()
-
-  const [currentBikeData, setCurrentBikeData] = useState<Bike>()
+  const { bike } = useBike()
+  const router = useRouter()
+  const isMobileScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   useEffect(() => {
-    if (state) {
-      const { bike } = state as StateReceived
-      setCurrentBikeData(bike)
+    if (!bike) {
+      router.push('/Home')
     }
-  }, [])
+  }, [bike, router])
 
-  return <BikeDetails bike={currentBikeData} />
+  return isMobileScreen ? <BikeDetailsMobile /> : <BikeDetailsDesktop />
 }
 
 export default BikeDetailsContainer

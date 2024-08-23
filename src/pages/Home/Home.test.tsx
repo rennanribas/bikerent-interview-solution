@@ -1,37 +1,44 @@
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-import { mockedBikesArray } from 'mocks/Bike'
-import Home from './Home.component'
+import Home from './Home.container'
+import mockRouter from 'next-router-mock'
+import { AuthProvider } from 'context/AuthContext'
+import { BikeProvider } from 'context/BikeContext'
+import { ThemeProvider } from '@mui/material'
+import theme from 'styles/theme'
 
-describe('Home page', () => {
+jest.mock('next/router', () => require('next-router-mock'))
+jest.mock('context/BikeContext', () => ({
+  ...jest.requireActual('context/BikeContext'),
+  useBike: () => ({ bikes: [], setBike: jest.fn() }),
+}))
 
-  it('should has a header', () => {
-    render(
-      <BrowserRouter>
-        <Home appIsNotConfigured={false} bikes={mockedBikesArray} />
-      </BrowserRouter>,
-    )
-    const headerElement = screen.getByTestId('header')
-    expect(headerElement).toBeInTheDocument()
+const renderWithProviders = (component: React.ReactNode) => {
+  return render(
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
+        <BikeProvider>{component}</BikeProvider>
+      </AuthProvider>
+    </ThemeProvider>,
+  )
+}
+
+describe('Home', () => {
+  beforeEach(() => {
+    mockRouter.push('/Home')
   })
 
-  it('should has a bikes list', () => {
-    render(
-      <BrowserRouter>
-        <Home appIsNotConfigured={false} bikes={mockedBikesArray} />
-      </BrowserRouter>,
-    )
-    const listElement = screen.getByTestId('bikes-list')
-    expect(listElement).toBeInTheDocument()
+  it('renders home components', () => {
+    renderWithProviders(<Home />)
+
+    expect(screen.getByTestId('home-page')).toBeInTheDocument()
+    expect(screen.getByTestId('header')).toBeInTheDocument()
+    expect(screen.getByTestId('bikes-list')).toBeInTheDocument()
   })
 
-  it('should display an error message', () => {
-    render(
-      <BrowserRouter>
-        <Home appIsNotConfigured bikes={[]} />
-      </BrowserRouter>,
-    )
-    const listElement = screen.getByTestId('configuration-error-message')
-    expect(listElement).toBeInTheDocument()
+  it('displays "No bikes available at the moment.." message when there are no bikes', () => {
+    renderWithProviders(<Home />)
+
+    expect(screen.getByText('No bikes available at the moment..')).toBeInTheDocument()
   })
 })
