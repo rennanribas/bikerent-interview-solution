@@ -18,6 +18,7 @@ type JustDisplayedBikeData = Omit<Bike, 'candidateId' | 'maxLoad' | 'ratings'>
 interface BikeCardComponentProps extends JustDisplayedBikeData {
   isImageLoaded: boolean
   cardImage: string
+  isAvailable: boolean
   handleOpenBikeDetails: () => void
   handleIsImageLoaded: (isLoading: boolean) => void
 }
@@ -30,6 +31,7 @@ const BikeCard = ({
   rate,
   handleOpenBikeDetails,
   handleIsImageLoaded,
+  isAvailable,
 }: BikeCardComponentProps) => {
   const LikeButton = (
     <IconButton>
@@ -37,11 +39,20 @@ const BikeCard = ({
     </IconButton>
   )
 
+  const notAvailableTypography = (
+    <Typography fontSize={24} fontWeight={700}>
+      Rented
+    </Typography>
+  )
+
   return (
     <Container variant='outlined' data-testid='bike-card'>
-      <Header action={LikeButton} />
+      <Header action={isAvailable ? LikeButton : notAvailableTypography} />
 
-      <div onClick={handleOpenBikeDetails}>
+      <div
+        onClick={handleOpenBikeDetails}
+        style={{ cursor: isAvailable ? 'pointer' : 'default', opacity: isAvailable ? 1 : 0.5 }}
+      >
         <ImageContainer>
           {!isImageLoaded && (
             <img

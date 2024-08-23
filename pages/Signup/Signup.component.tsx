@@ -1,110 +1,116 @@
-import { Typography, TextField, Button, Box, Alert } from '@mui/material'
+import { InputAdornment, Typography, Link } from '@mui/material'
+import {
+  Container,
+  ErrorMessage,
+  Form,
+  HomeButton,
+  Input,
+  SignupCard,
+  SubmitButton,
+  Title,
+} from './Signup.styles'
+import { AccountCircle, PasswordOutlined, PersonOutline } from '@mui/icons-material'
+import { useSignup } from './hooks/useSignup'
+import NextLink from 'next/link'
 import { useEffect, useState } from 'react'
-import { Container, PaperStyled } from './Signup.styles'
-import { useRouter } from 'next/router'
-import { useAuth } from 'context/AuthContext'
+import HomeOutlined from '@mui/icons-material/HomeOutlined'
 
 const Signup = () => {
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    password: '',
-  })
-  const [error, setError] = useState<string | null>(null)
-  const router = useRouter()
-  const { login, isAuthenticated } = useAuth()
+  const { errors, register, onSubmit } = useSignup()
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push('/Home')
-    }
-  }, [isAuthenticated, router])
+    setIsClient(true)
+  }, [])
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setFormState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
-  }
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault() // Prevent default form submission
-
-    const { name, email, password } = formState
-
-    if (!name || !email || !password) {
-      setError('All fields are required')
-      return
-    }
-
-    try {
-      const response = await fetch(
-        `/api/services/signup?email=${email}&password=${password}&name=${name}`,
-      )
-
-      if (response.ok) {
-        const { user, token } = await response.json()
-        await login(user, token)
-        router.push('/Home')
-      } else {
-        const { error: errorMessage } = await response.json()
-        setError(errorMessage || 'An unknown error occurred')
-      }
-    } catch (error) {
-      console.error('Signup error:', error)
-      setError('An unexpected error occurred')
-    }
+  if (!isClient) {
+    return null
   }
 
   return (
     <Container data-testid='signup-page'>
-      <PaperStyled>
-        <Typography variant='h1'>Create Account</Typography>
-        {error && (
-          <Alert severity='error' sx={{ mb: 2 }}>
-            {error}
-          </Alert>
-        )}{' '}
-        {/* Display error message */}
-        <Box component='form' noValidate autoComplete='off' onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <TextField
-            fullWidth
+      <NextLink href='/' passHref>
+        <HomeButton data-testid='home-button'>
+          <HomeOutlined />
+        </HomeButton>
+      </NextLink>
+      <SignupCard>
+        <Title color='primary' variant='h1'>
+          Create Account
+        </Title>
+        <Typography variant='subtitle1' align='center'>
+          Sign up to start renting bikes
+        </Typography>
+        <Form data-testid='form-container' onSubmit={onSubmit}>
+          <Input
+            required
+            data-testid='name-input'
+            {...register('name')}
+            error={!!errors.name?.message}
             label='Name'
-            variant='outlined'
-            margin='normal'
-            name='name'
-            value={formState.name}
-            onChange={handleChange}
-            required
-          />
-          <TextField
+            type='text'
             fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <PersonOutline color='primary' />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
+          <Input
+            required
+            data-testid='email-input'
+            {...register('email')}
+            error={!!errors.email?.message}
             label='Email'
-            variant='outlined'
-            margin='normal'
-            name='email'
             type='email'
-            value={formState.email}
-            onChange={handleChange}
-            required
-          />
-          <TextField
             fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <AccountCircle color='primary' />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {errors.email?.message && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
+          <Input
+            required
+            data-testid='password-input'
+            error={!!errors.password?.message}
+            {...register('password')}
             label='Password'
             type='password'
-            variant='outlined'
-            margin='normal'
-            name='password'
-            value={formState.password}
-            onChange={handleChange}
-            required
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <PasswordOutlined color='primary' />
+                </InputAdornment>
+              ),
+            }}
           />
-          <Button fullWidth variant='contained' color='primary' type='submit' sx={{ mt: 2 }}>
-            Register
-          </Button>
-        </Box>
-      </PaperStyled>
+          {errors.password?.message && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
+
+          <SubmitButton
+            data-testid='signup-button'
+            type='submit'
+            variant='contained'
+            disableElevation
+            fullWidth
+          >
+            Sign Up
+          </SubmitButton>
+        </Form>
+        <Typography variant='body2' align='center'>
+          Already have an account?{' '}
+          <NextLink href='/Login' passHref>
+            <Link color='primary'>Log in</Link>
+          </NextLink>
+        </Typography>
+      </SignupCard>
     </Container>
   )
 }

@@ -1,6 +1,4 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
-import { useMediaQuery } from '@mui/material'
-import theme from 'styles/theme'
 import { Period } from 'components/DateRangePicker/DateRangePicker.types'
 import { abreviatedMonths } from 'components/DateRangePicker/DateRangePicker.utils'
 import { apiServer } from '../../../../pages/api/[...path]'
@@ -20,7 +18,7 @@ const useBookingState = () => {
 
   const [selectedPeriod, setSelectedPeriod] = useState<Partial<Period>>({})
   const [openMobileDrawer, setOpenMobileDrawer] = useState(false)
-  const [isBooked, setBooked] = useState<boolean>(false)
+  const [isBooked, setIsBooked] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [openBookedModal, setOpenBookedModal] = useState<boolean>(false)
   const [rentAmount, setRentAmount] = useState<number>(0)
@@ -28,10 +26,8 @@ const useBookingState = () => {
   const [servicesFee, setServicesFee] = useState<number>(0)
   const [isRenting, setIsRenting] = useState<boolean>(false)
 
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('sm'))
-
   const toggleBookedModal = () => setOpenBookedModal((state) => !state)
-  const toggleBooked = () => setBooked((state) => !state)
+  const toggleBooked = () => setIsBooked((state) => !state)
   const toggleMobileDrawer = () => setOpenMobileDrawer((state) => !state)
 
   const onChangePeriod = async (period: Partial<Period>) => {
@@ -73,11 +69,7 @@ const useBookingState = () => {
         dateTo: selectedPeriod?.endDate.format('YYYY-MM-DD'),
       })
 
-      if (isMobileScreen) {
-        toggleBookedModal()
-      } else {
-        toggleBooked()
-      }
+      toggleBooked()
     } catch (error) {
       if (error instanceof AxiosError)
         throw new Error(error.response?.data?.message || 'Error renting bike')

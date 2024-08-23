@@ -23,6 +23,7 @@ import Booked from 'components/Booking/Booked'
 import MobileMenu from 'components/MobileMenu/Menu.component'
 import Link from 'next/link'
 import BikeCardMini from 'components/BikeCardMini'
+import { useBike } from 'context/BikeContext'
 
 const MobileBooking = () => {
   const {
@@ -34,6 +35,7 @@ const MobileBooking = () => {
     handleBooking,
     isBooked,
   } = useBooking()
+  const { setBike } = useBike()
 
   return (
     <BookingContainer data-testid='booking-container'>
@@ -113,7 +115,7 @@ const MobileBooking = () => {
         </StyledDrawer>
       </TransparentSwipeableDrawer>
 
-      <BookedModal open={isBooked}>
+      <BookedModal open={isBooked} onClose={() => setBike()}>
         <Booked />
       </BookedModal>
     </BookingContainer>

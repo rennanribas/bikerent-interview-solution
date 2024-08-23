@@ -94,8 +94,9 @@ export const MobileSelectDateButton = styled(Button)<ButtonProps>(({ theme }) =>
 }))
 
 export const BookedModal = styled(Modal)(() => ({
-  width: '100%',
-  height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }))
 
 export const StyledDrawer = styled(Box)(({ theme }) => ({

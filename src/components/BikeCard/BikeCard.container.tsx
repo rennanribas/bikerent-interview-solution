@@ -7,17 +7,20 @@ import { useBike } from 'context/BikeContext'
 
 interface BikeCardProps {
   bike: Bike
+  isAvailable: boolean
 }
 
-const BikeCardContainer = ({ bike }: BikeCardProps) => {
+const BikeCardContainer = ({ bike, isAvailable }: BikeCardProps) => {
   const router = useRouter()
   const { setBike } = useBike()
 
   const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   const handleOpenBikeDetails = () => {
-    setBike(bike)
-    router.push('/BikeDetails')
+    if (isAvailable) {
+      setBike(bike)
+      router.push('/BikeDetails')
+    }
   }
 
   const handleIsImageLoaded = (isLoading: boolean) => {
@@ -37,6 +40,7 @@ const BikeCardContainer = ({ bike }: BikeCardProps) => {
       imageUrls={bike.imageUrls}
       cardImage={bike.imageUrls[0] || ''}
       rate={bike.rate}
+      isAvailable={isAvailable}
     />
   )
 }
